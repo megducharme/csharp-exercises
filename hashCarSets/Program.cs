@@ -48,6 +48,26 @@ namespace hashCarSets
                 Console.WriteLine(car);
             }
 
+            //Now create another HashSet of cars in a variable Junkyard. Someone who owns a junkyard full of old cars has approached you about buying the entire inventory. In the new set, add some different cars, but also add a few that are the same as in the Showroom set.
+            HashSet<string> Junkyard = new HashSet<string>();
+            Junkyard.Add("Acura");
+            Junkyard.Add("Civic");
+            Junkyard.Add("Ford Focus");
+            Junkyard.Add("Truck");
+            Junkyard.Add("Tesla");
+
+            //Use the IntersectWith() method to see which cars exist in both the show room and the junkyard.
+            Showroom.IntersectWith(Junkyard);
+            Console.WriteLine("after intersectwith");
+            foreach(string car in Showroom){
+                Console.WriteLine(car);
+            }
+
+            //Now you're ready to buy the cars in the junkyard. Use the UnionWith() method to combine the junkyard into your showroom.
+            Showroom.UnionWith(Junkyard);
+
+            //Use the Remove() method to remove any cars that you acquired from the junkyard that you want in your showroom.
+            Showroom.Remove("Truck");
         }
     }
 }

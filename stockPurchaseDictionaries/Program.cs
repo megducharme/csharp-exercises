@@ -51,6 +51,19 @@ namespace stockPurchaseDictionaries
                 }
             }
 
+            foreach (KeyValuePair<string, string> stock in stocks)
+            {
+                foreach (KeyValuePair<string, double> purchase in purchaseInfo)
+                {
+                    if(stock.Key == purchase.Key)
+                    {
+                        // Console.WriteLine(stock.Value);
+                        // Console.WriteLine(purchase.Key);
+                        purchase.Key = stock.Value;
+                    }
+                }
+            }
+
             // foreach ((string ticker, int shares, double price) purchase in purchases)
             // {
             //     try

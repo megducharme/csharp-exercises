@@ -39,6 +39,10 @@ namespace pythonPlanetList
                 Console.WriteLine(planet);
             }
 
+            List<Dictionary<string, List<string>>> solarSystemProbes = new List<Dictionary<string, List<string>>>();{
+                
+            }
+
         }
     }
 }
