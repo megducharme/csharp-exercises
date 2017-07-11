@@ -16,7 +16,7 @@ namespace stockPurchaseDictionaries
 
             List<(string ticker, int shares, double price)> purchases = new List<(string, int, double)>();
             
-            purchases.Add((ticker: "GE", shares: 150, price: 23.21));
+            purchases.Add((ticker: "GM", shares: 150, price: 23.21));
             purchases.Add((ticker: "CAT", shares: 340, price: 90.21));
             purchases.Add((ticker: "AAPL", shares: 450, price: 5523.21));
             purchases.Add((ticker: "AMZN", shares: 750, price: 9545.21));
@@ -36,51 +36,39 @@ namespace stockPurchaseDictionaries
             */
             Dictionary<string, double> purchaseInfo = new Dictionary<string, double>();
 
-            // Iterate over the purchases and 
-            foreach ((string ticker, int shares, double price) purchase in purchases)
-            {
-                if (purchaseInfo.ContainsKey(purchase.ticker)){
-                    Console.WriteLine(purchase.ticker);
-                    purchaseInfo[purchase.ticker] += (purchase.price * Convert.ToDouble(purchase.shares));
-                    Console.WriteLine(purchaseInfo[purchase.ticker]);
-                }
-                else
+            foreach ((string ticker, int shares, double price) purchase in purchases){
+                if(stocks.ContainsKey(purchase.ticker))
                 {
-                    purchaseInfo[purchase.ticker] = (purchase.price * Convert.ToDouble(purchase.shares));
-                    Console.WriteLine(purchase);
-                }
-            }
-
-            foreach (KeyValuePair<string, string> stock in stocks)
-            {
-                foreach (KeyValuePair<string, double> purchase in purchaseInfo)
-                {
-                    if(stock.Key == purchase.Key)
+                    if(purchaseInfo.ContainsKey(purchase.ticker))
                     {
-                        // Console.WriteLine(stock.Value);
-                        // Console.WriteLine(purchase.Key);
-                        purchase.Key = stock.Value;
+                        purchaseInfo[stocks[purchase.ticker]] += purchase.shares * purchase.price;
+                    }
+                    else
+                    {
+                        purchaseInfo[stocks[purchase.ticker]] = purchase.shares * purchase.price;
                     }
                 }
             }
 
-            // foreach ((string ticker, int shares, double price) purchase in purchases)
-            // {
-            //     try
-            //     {
-
-            //         purchaseInfo.Add(purchase.ticker, (purchase.price * Convert.ToDouble(purchase.shares)));
-            //     }
-            //     catch
-            //     {
-            //         purchaseInfo[purchase.ticker] += (purchase.price * Convert.ToDouble(purchase.shares));
-            //     }
-            // }
-
             foreach (KeyValuePair<string, double> t in purchaseInfo)
             {
-                Console.WriteLine(t);
+                Console.WriteLine($"{t.Key} {t.Value:C}");
             }
+
+            // Iterate over the purchases and 
+            // foreach ((string ticker, int shares, double price) purchase in purchases)
+            // {
+            //     if (purchaseInfo.ContainsKey(purchase.ticker)){
+            //         Console.WriteLine(purchase.ticker);
+            //         purchaseInfo[purchase.ticker] += (purchase.price * Convert.ToDouble(purchase.shares));
+            //         Console.WriteLine(purchaseInfo[purchase.ticker]);
+            //     }
+            //     else
+            //     {
+            //         purchaseInfo[purchase.ticker] = (purchase.price * Convert.ToDouble(purchase.shares));
+            //         Console.WriteLine(purchase);
+            //     }
+            // }
         }
     }
 }

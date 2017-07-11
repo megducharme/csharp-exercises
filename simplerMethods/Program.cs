@@ -8,9 +8,7 @@ namespace simplerMethods
         static void Main(string[] args)
         {
             Console.WriteLine("Hello World!");
-            List<string> thingsToEat = new List<string>(){"pollen", "stuff", "food"};
-            List<string> thingsThatEatYou = new List<string>(){"cats", "venus fly trap", "frogs"};
-            Bug albert = new Bug("Albert","Bug", thingsToEat, thingsThatEatYou);
+            Bug albert = new Bug("Albert","Bug", new List<string>(){"pollen", "stuff", "food"}, new List<string>(){"cats", "venus fly trap", "frogs"});
             albert.Eat("Goldfish");
         }
     }
@@ -35,8 +33,8 @@ namespace simplerMethods
         {
             this.Name = name;
             this.Species = species;
-            this.Predators.AddRange(predators);
-            this.Prey.AddRange(prey);
+            this.Predators = predators;
+            this.Prey = prey;
         }
 
         // Convert this method to an expression member
@@ -54,11 +52,7 @@ namespace simplerMethods
         }
 
         // Convert this to expression method (hint: use a C# ternary)
-        public string Eat(string food)
-        {
-            string answer = this.Prey.Contains(food) ? $"{this.Name} ate the {food}." : $"{this.Name} is still hungry.";
-            Console.WriteLine(answer);
-            return answer;
-        }
+        public string Eat(string food) => this.Prey.Contains(food) ? $"{this.Name} ate the {food}." : $"{this.Name} is still hungry.";
+
     }
 }
