@@ -2,9 +2,16 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace millionaires
+namespace millionaires2
 {
-// Build a collection of customers who are millionaires
+
+    public class Bank
+    {
+        public string Symbol { get; set; }
+        public string Name { get; set; }
+    }
+
+    // Define a customer
     public class Customer
     {
         public string Name { get; set; }
@@ -15,6 +22,15 @@ namespace millionaires
     public class Program
     {
         public static void Main() {
+            // Create some banks and store in a List
+            List<Bank> banks = new List<Bank>() {
+                new Bank(){ Name="First Tennessee", Symbol="FTB"},
+                new Bank(){ Name="Wells Fargo", Symbol="WF"},
+                new Bank(){ Name="Bank of America", Symbol="BOA"},
+                new Bank(){ Name="Citibank", Symbol="CITI"},
+            };
+
+            // Create some customers and store in a List
             List<Customer> customers = new List<Customer>() {
                 new Customer(){ Name="Bob Lesman", Balance=80345.66, Bank="FTB"},
                 new Customer(){ Name="Joe Landy", Balance=9284756.21, Bank="WF"},
@@ -28,16 +44,17 @@ namespace millionaires
                 new Customer(){ Name="Sid Brown", Balance=49582.68, Bank="CITI"}
             };
 
-        var millionaires13 = from cust in customers
-                            where(cust.Balance > 1000000)
-                            group cust by cust.Bank into g
-                            select new {Bank = g.Key, Customers = g.ToList()};
+            var millionaires = from cust in customers
+                                where(cust.Balance > 1000000)
+                                join b in banks on cust.Bank equals b.Symbol
+                                select new {CustomerName = cust.Name, Bank = b.Name};
 
-        foreach(var person in millionaires13)
-        {
-            Console.WriteLine($"{person.Bank}, {person.Customers.Count}");
-        }
-           
+
+            foreach(var richPerson in millionaires)
+            {
+                Console.WriteLine($"{richPerson.CustomerName} - {richPerson.Bank}");
+            }
+
         }
     }
 }
