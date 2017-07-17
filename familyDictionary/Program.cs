@@ -29,26 +29,34 @@ namespace familyDictionary
                 {"age", "57"}
             });
 
-            string memberName = "";
-            string memberAge = "";
-            int counter = 0;
 
-            foreach(KeyValuePair<string, Dictionary<string, string>> member in myFamily)
+            foreach(KeyValuePair<string, Dictionary<string, string>> member in myFamily )
             {
-                foreach(KeyValuePair<string, string> property in member.Value)
-                {
-                    counter ++;
-                    if (counter == 1)
-                    {
-                        memberName = property.Value;
-                    }
-                    else{
-                        memberAge = property.Value;
-                        counter = 0;
-                    }
-                }
-                Console.WriteLine(memberName + " is my " + member.Key + " and they are  " + memberAge + " years old.");
-            } 
+                Console.WriteLine(member.Value["name"] + " is my " + member.Key + " and they are " + member.Value["age"] + " years old." ); 
+            }
+
+            // /////////////////////////// the long way to do it //////////////////////
+            
+            // string memberName = "";
+            // string memberAge = "";
+            // int counter = 0;
+
+            // foreach(KeyValuePair<string, Dictionary<string, string>> member in myFamily)
+            // {
+            //     foreach(KeyValuePair<string, string> property in member.Value)
+            //     {
+            //         counter ++;
+            //         if (counter == 1)
+            //         {
+            //             memberName = property.Value;
+            //         }
+            //         else{
+            //             memberAge = property.Value;
+            //             counter = 0;
+            //         }
+            //     }
+            //     Console.WriteLine(memberName + " is my " + member.Key + " and they are  " + memberAge + " years old.");
+            // } 
         }
     }
 }
